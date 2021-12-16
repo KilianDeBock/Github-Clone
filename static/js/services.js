@@ -15,7 +15,10 @@ function UsersApi() {
 }
 
 function WeatherApi() {
-  this.getCurrentWeather = async () => {
+  this.getCurrentWeather = async (city = 'Ghent') => {
+    const key = 'de293147099b4f26a26184812211512';
+    const result = await fetch(`https://api.weatherapi.com/v1/current.json?key=${key}&q=${city}`);
+    return result.json();
   };
 }
 
