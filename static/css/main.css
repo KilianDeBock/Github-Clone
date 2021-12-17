@@ -1,0 +1,20 @@
+:root {
+    --blue-100: #4e86c5;
+    --blue-200: #58a6ff;
+    --blue-500: #262930;
+    --gray-550: #1a1d24;
+    --blue-600: #161b21;
+    --blue-800: #0d1017;
+    --gray-500: #0d1017;
+    --white-300: #f3f1ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: var(--blue-600);
+    width: 100%;
+}
