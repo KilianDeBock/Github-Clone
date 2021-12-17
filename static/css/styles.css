@@ -1,0 +1,35 @@
+.flex {
+    display: flex;
+}
+
+.flex-out {
+    justify-content: space-between;
+}
+
+.round-img_link,
+.round-img_link img {
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.opener {
+    position: absolute;
+    font-size: 3rem;
+    left: 1rem;
+    transition: left 0.2s ease-in-out, right 0.2s ease-in;
+}
+
+.opener_right {
+    right: 1rem;
+    transform: translateX(-.5rem) rotate(180deg);
+}
+
+@media (min-width: 63rem) {
+    .opener {
+        left: -20rem;
+    }
+
+    .opener_right {
+        right: -20rem;
+    }
+}

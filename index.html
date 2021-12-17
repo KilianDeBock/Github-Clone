@@ -1,21 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
-    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/main.css"/>
+    <link rel="stylesheet" href="static/css/styles.css"/>
+    <link rel="stylesheet" href="static/css/text.css"/>
 </head>
 <body>
-
 <header>
-    <nav>
+    <nav class="main-nav">
         <section class="nav_gitlogo">
-            <a href="linktoidk">
-                <img src="static/media/images/" alt="">
+            <a class="round-img_link" href="linktoidk">
+                <img src="static/media/images/icons/github.png" alt="Github logo"/>
             </a>
         </section>
     </nav>
 </header>
+
+<main class="flex flex-out">
+    <aside id="pgm-team">
+        <div class="opener" data-parent="pgm-team">➤</div>
+        <section class="content aside aside_left">
+            <h3>PGM Team</h3>
+            <ul class="team-pgm">
+                <div>TEST</div>
+            </ul>
+        </section>
+    </aside>
+
+    <section class="container content">
+        <h2>Repositories</h2>
+        <section class="repos">
+            <article>
+                <h4>blabla</h4>
+                <p>
+                    text text text text text text text text text text text text text
+                    text text text text text text
+                </p>
+                <div class="tags">
+                    <span class="size">71KB</span>
+                    <span>master</span>
+                    <span>Apache-2.0</span>
+                    <span>public</span>
+                    <span>0</span>
+                    <span>0</span>
+                    <span>0</span>
+                </div>
+            </article>
+            <article>
+                <h4>blabla</h4>
+                <p>
+                    text text text text text text text text text text text text text
+                    text text text text text text
+                </p>
+                <div class="tags">
+                    <span class="size">71KB</span>
+                    <span>master</span>
+                    <span>Apache-2.0</span>
+                    <span>public</span>
+                    <span>0</span>
+                    <span>0</span>
+                    <span>0</span>
+                </div>
+            </article>
+        </section>
+
+        <h2>Folowers</h2>
+        <section class="repos">
+            <article>
+                <h4>No Followers...</h4>
+            </article>
+        </section>
+    </section>
+
+    <aside id="github-users">
+        <div class="opener opener_right" data-parent="pgm-team">➤</div>
+        <section class="content aside aside_right">
+            <h3>GitHub Users</h3>
+            <ul class="users-github">
+                <div>TEST</div>
+            </ul>
+        </section>
+    </aside>
+</main>
 
 <script src="static/js/services.js"></script>
 <script src="static/js/main.js"></script>
