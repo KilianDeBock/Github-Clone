@@ -22,3 +22,9 @@ h2 {
 h3 {
     font-size: 1.8rem;
 }
+
+.text_bold {
+    font-weight: bold;
+    letter-spacing: .02rem;
+    line-height: 1.2rem
+}

@@ -12,16 +12,97 @@
     display: inline-block;
 }
 
+.round-img,
+.round-img img {
+    border-radius: 50%;
+    margin: auto 0;
+    display: inline-block;
+}
+
 .opener {
     position: absolute;
+    width: 3rem;
+    cursor: pointer;
+    height: 3rem;
     font-size: 3rem;
+    z-index: 1;
     left: 1rem;
-    transition: left 0.2s ease-in-out, right 0.2s ease-in;
+    transition: left .2s ease-in-out, right .2s ease-in;
+    animation-name: opener;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 
 .opener_right {
-    right: 1rem;
-    transform: translateX(-.5rem) rotate(180deg);
+    left: calc(100% - 4rem);
+    transform: translateY(2.6rem) rotate(180deg);
+    animation-name: opener_right;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.closer {
+    color: red;
+    cursor: pointer;
+    position: absolute;
+    top: 3.5rem;
+    font-size: 5rem;
+    z-index: 2;
+    left: -5rem;
+    transition: left .2s ease-in-out, right .2s ease-in;
+    animation-name: closer;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.closer_right {
+    left: 110%;
+}
+
+.team-pgm li {
+    display: flex;
+}
+
+.team-pgm li:nth-child(2n+2) {
+    background-color: var(--blue-600);
+}
+
+.team-pgm li > * {
+    margin: .5rem 0 .5rem 1rem;
+}
+
+.tags > *:not(:first-child) {
+    padding-left: 2rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.tags > *:not(:last-child) {
+    margin-right: 1.5rem;
+}
+
+.tags > .branche {
+    background-image: url("../media/images/icons/branche.svg");
+}
+
+.tags > .license {
+    background-image: url("../media/images/icons/license.svg");
+}
+
+.tags > .visibility {
+    background-image: url("../media/images/icons/security.svg");
+}
+
+.tags > .issues {
+    background-image: url("../media/images/icons/issues.svg");
+}
+
+.tags > .watch {
+    background-image: url("../media/images/icons/watch.svg");
+}
+
+.tags > .stars {
+    background-image: url("../media/images/icons/star.svg");
 }
 
 @media (min-width: 63rem) {
@@ -30,6 +111,28 @@
     }
 
     .opener_right {
-        right: -20rem;
+        left: 100%;
+    }
+}
+
+@keyframes opener {
+    30% {
+
+        transform: translateX(1rem) scale(1.2) rotate(-5deg);
+    }
+    60% {
+
+        transform: translateX(1rem) scale(1.2) rotate(5deg);
+    }
+}
+
+@keyframes opener_right {
+    30% {
+
+        transform: translateX(-1rem) scale(1.2) rotate(5deg) translateY(2.6rem) rotate(180deg);;
+    }
+    60% {
+
+        transform: translateX(-1rem) scale(1.2) rotate(-5deg) translateY(2.6rem) rotate(180deg);;
     }
 }

@@ -20,5 +20,10 @@ function WeatherApi() {
 }
 
 function GhentOpenDataApi() {
-  this.getCovidPositiveCases = async () => {};
+  this.getCovidPositiveCases = async () => {
+    const result = await fetch(
+      `https://data.stad.gent/api/records/1.0/search/?dataset=dataset-of-cumulative-number-of-confirmed-cases-by-municipality`
+    );
+    return result.json();
+  };
 }
