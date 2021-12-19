@@ -6,6 +6,10 @@
     justify-content: space-between;
 }
 
+.align-center {
+    align-items: center;
+}
+
 .round-img_link,
 .round-img_link img {
     border-radius: 50%;
@@ -14,6 +18,9 @@
 
 .round-img,
 .round-img img {
+    height: 3rem;
+    width: 3rem;
+    object-fit: cover;
     border-radius: 50%;
     margin: auto 0;
     display: inline-block;
@@ -59,16 +66,21 @@
     left: 110%;
 }
 
-.team-pgm li {
+.listing {
+    overflow-y: auto;
+    height: calc(100vh - 12rem);
+}
+
+.listing li {
     display: flex;
 }
 
-.team-pgm li:nth-child(2n+2) {
+.listing li:nth-child(2n+2) {
     background-color: var(--blue-600);
 }
 
-.team-pgm li > * {
-    margin: .5rem 0 .5rem 1rem;
+.listing li > * {
+    margin: .5rem;
 }
 
 .tags > *:not(:first-child) {
@@ -103,6 +115,37 @@
 
 .tags > .stars {
     background-image: url("../media/images/icons/star.svg");
+}
+
+.weather {
+    padding-left: 4rem;
+    background-repeat: no-repeat;
+    background-size: 3.5rem;
+    background-position: 0 50%;
+    background-image: url("../media/images/icons/weather.gif");
+}
+
+.covid-cases {
+    padding-left: 2.8rem;
+    background-repeat: no-repeat;
+    background-size: 2rem;
+    background-position: 0 50%;
+    background-image: url("../media/images/icons/covid-19.svg");
+    margin-right: 2.5rem;
+}
+
+form input {
+    background-color: var(--blue-500);
+    border: none;
+    width: 70%;
+    padding: .5rem 1rem;
+}
+
+form button {
+    background-color: var(--gray-550);
+    border: none;
+    width: 30%;
+    padding: .5rem 1rem;
 }
 
 @media (min-width: 63rem) {

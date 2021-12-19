@@ -10,12 +10,16 @@
 <body>
 <header>
     <nav class="main-nav">
-        <a class="round-img_link" href="linktoidk">
+        <a class="round-img_link" href="https://github.com/pgmpgent-2021-pgm-2/pgm-2_project_1-pgm-kilidebo">
             <img src="static/media/images/icons/github.png" alt="Github logo"/>
         </a>
         <section>
-            <div class="covid-cases">0</div>
-            <div><span class="weather">18</span>°C</div>
+            <div>
+                <span class="covid-cases">0</span>
+            </div>
+            <div>
+                <span class="weather">18</span>°C
+            </div>
         </section>
     </nav>
 </header>
@@ -27,22 +31,7 @@
     <div class="closer closer_right" data-parent="github-users">🗶</div>
     <aside id="pgm-team" class="aside_left">
         <h3>PGM Team</h3>
-        <ul class="team-pgm">
-            <li>
-                <img class="round-img" src="static/media/images/thumbnail/4de57865-11de-4f39-a46c-c5518132e9e4.jpg" alt="Adriaan">
-                <div>
-                    <p class="text_bold">Adriaan</p>
-                    <p>Adriaan Glibert</p>
-                </div>
-            </li>
-            <li>
-                <img class="round-img" src="static/media/images/thumbnail/4de57865-11de-4f39-a46c-c5518132e9e4.jpg" alt="Adriaan">
-                <div>
-                    <p class="text_bold">Adriaan</p>
-                    <p>Adriaan Glibert</p>
-                </div>
-            </li>
-        </ul>
+        <ul class="team-pgm listing"></ul>
     </aside>
 
     <section class="container content">
@@ -92,9 +81,11 @@
 
     <aside id="github-users" class="aside_right">
         <h3>GitHub Users</h3>
-        <ul class="users-github">
-            <div>TEST</div>
-        </ul>
+        <form class="flex github-search-form">
+            <input id="github-search" name="search" placeholder="username">
+            <button class="github-search">Search</button>
+        </form>
+        <ul class="users-github listing"></ul>
     </aside>
 </main>
 

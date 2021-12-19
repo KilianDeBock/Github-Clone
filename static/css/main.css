@@ -42,12 +42,16 @@ body {
 /* Navigation */
 nav {
     display: flex;
-    position: relative;
+    position: fixed;
     background-color: var(--blue-600);
-    max-width: 100%;
+    width: 100%;
     height: 6rem;
     padding: 1rem 2rem;
     justify-content: space-between;
+}
+
+main {
+    padding-top: 6rem;
 }
 
 .main-nav {
@@ -63,17 +67,8 @@ nav {
 }
 
 .main-nav > section > * {
-    margin: 0 .7rem;
     font-size: 2rem;
     font-weight: bold;
-}
-
-.weather {
-
-}
-
-.covid-count {
-
 }
 
 /* Main content */
@@ -112,11 +107,10 @@ main > .content > section > article:not(:last-child) {
 
 /* Aside menus */
 aside {
-    position: absolute;
-    top: 0;
-    padding-top: 6rem;
+    position: fixed;
+    top: 6rem;
     background-color: var(--blue-800);
-    height: 100vh;
+    height: calc(100vh - 6rem);
     width: 18rem;
     z-index: 1;
     transition: left .2s ease-in-out, right .2s ease-in-out;
@@ -130,6 +124,22 @@ aside {
 .aside_right {
     right: -18rem;
     border-left: 1px solid var(--gray-500);
+}
+
+::-webkit-scrollbar {
+    width: .5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--blue-500);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--blue-600);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--blue-800);
 }
 
 @media (min-width: 63rem) {
