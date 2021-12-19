@@ -17,10 +17,8 @@
     cacheElements() {
       this.$openers = document.querySelectorAll(".opener");
       this.$closers = document.querySelectorAll(".closer");
-      // this.$asides = document.querySelectorAll("main > aside");
       this.$teamPgm = document.querySelector(".team-pgm");
       this.$usersGithub = document.querySelector(".users-github");
-      this.$githubSearch = document.querySelector(".github-search");
       this.$githubSearchForm = document.querySelector(".github-search-form");
       this.$githubSearchInput = document.querySelector("#github-search");
       this.$content = document.querySelector("main > section.content");
@@ -63,13 +61,10 @@
           otherOpener = document.querySelector(`.opener:not(.opener_right)`);
         }
         const parent = document.querySelector(`#${closer.dataset.parent}`);
-        closer.addEventListener("click", (ev) => {
+        closer.addEventListener("click", () => {
           otherOpener.style.left = parent.style = closer.style.left = "";
         });
       });
-
-      // Github search
-      this.$githubSearch.addEventListener("click", (ev) => {});
 
       this.$githubSearchForm.addEventListener("submit", (ev) => {
         // For browser compatibility will change the submit query myself.
@@ -139,28 +134,28 @@
       const repos = data
         .map((repo) => {
           const license = repo.license
-            ? '<span className="license">${repo.license.name}</span>'
+            ? `<span class="license">${repo.license.name}</span>`
             : "";
           return `
-            <article>
-                <h4>${repo.full_name}</h4>
-                <p>${repo.description}</p>
-                <div class="tags">
-                    <span class="size">${repo.size}KB</span>
-                    <span class="branche">${repo.default_branche}</span>
-                    ${license}
-                    <span class="visibility">${repo.visibility}</span>
-                    <span class="issues">${repo.open_issues}</span>
-                    <span class="watch">${repo.watchers_count}</span>
-                    <span class="stars">${repo.stargazers_count}</span>
-                </div>
-            </article>`;
+          <article>
+              <h4>${repo.full_name}</h4>
+              <p>${repo.description}</p>
+              <div class="tags">
+                  <span class="size">${repo.size}KB</span>
+                  <span class="branche">${repo.default_branche}</span>${license}
+                  <span class="visibility">${repo.visibility}</span>
+                  <span class="issues">${repo.open_issues}</span>
+                  <span class="watch">${repo.watchers_count}</span>
+                  <span class="stars">${repo.stargazers_count}</span>
+              </div>
+          </article>`;
         })
         .join("");
+      console.log(repos);
       this.$content.innerHTML = `
         <h2>Repositories</h2>
         <section class="repos">
-          ${repos}
+            ${repos}
         </section>`;
     },
   };

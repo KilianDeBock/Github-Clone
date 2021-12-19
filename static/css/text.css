@@ -23,6 +23,11 @@ h3 {
     font-size: 1.8rem;
 }
 
+h4 {
+    display: inline-block;
+    font-size: 1.3rem;
+}
+
 .text_bold {
     font-weight: bold;
     letter-spacing: .02rem;

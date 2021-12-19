@@ -73,9 +73,11 @@ main {
 
 /* Main content */
 main > section {
+    position: fixed;
     flex-grow: 1;
-    position: relative;
+    left: 0;
     padding: 5rem 1.5rem;
+    width: 100vw;
     max-width: 100%;
 }
 
@@ -107,7 +109,7 @@ main > .content > section > article:not(:last-child) {
 
 /* Aside menus */
 aside {
-    position: relative;
+    position: fixed;
     top: 6rem;
     background-color: var(--blue-800);
     height: calc(100vh - 6rem);
@@ -145,6 +147,7 @@ aside {
 @media (min-width: 63rem) {
     main > section {
         margin: 0 18rem;
+        width: calc(100vw - (18rem * 2));
     }
 
     .aside_left {
