@@ -12,6 +12,7 @@
       this.fetchGithubUsers(this.url.searchParams.get("search")).then((r) =>
         this.updateGithubUsers(r)
       );
+      this.fetchUserRepositories().then((r) => this.updateUserRepositories(r));
     },
     cacheElements() {
       this.$openers = document.querySelectorAll(".opener");
@@ -111,13 +112,13 @@
         .join("");
     },
     async fetchGithubUsers(search) {
-      if (search === "" || search === null) return [];
+      if (search === "" || search === null) return false;
       this.$githubSearchInput.value = search;
       const githubApi = new GitHubApi();
       return await githubApi.getSearchUsers(search);
     },
     updateGithubUsers(users) {
-      console.log(users);
+      if (!users) return;
       this.$usersGithub.innerHTML = users.items
         .map((user) => {
           return `
@@ -129,6 +130,38 @@
           </li>`;
         })
         .join("");
+    },
+    async fetchUserRepositories(username = "pgmgent") {
+      const githubApi = new GitHubApi();
+      return await githubApi.getReposOfUsers(username);
+    },
+    updateUserRepositories(data) {
+      const repos = data
+        .map((repo) => {
+          const license = repo.license
+            ? '<span className="license">${repo.license.name}</span>'
+            : "";
+          return `
+            <article>
+                <h4>${repo.full_name}</h4>
+                <p>${repo.description}</p>
+                <div class="tags">
+                    <span class="size">${repo.size}KB</span>
+                    <span class="branche">${repo.default_branche}</span>
+                    ${license}
+                    <span class="visibility">${repo.visibility}</span>
+                    <span class="issues">${repo.open_issues}</span>
+                    <span class="watch">${repo.watchers_count}</span>
+                    <span class="stars">${repo.stargazers_count}</span>
+                </div>
+            </article>`;
+        })
+        .join("");
+      this.$content.innerHTML = `
+        <h2>Repositories</h2>
+        <section class="repos">
+          ${repos}
+        </section>`;
     },
   };
   app.init();

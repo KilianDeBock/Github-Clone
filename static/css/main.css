@@ -51,7 +51,7 @@ nav {
 }
 
 main {
-    padding-top: 6rem;
+    padding: 6rem;
 }
 
 .main-nav {
@@ -107,7 +107,7 @@ main > .content > section > article:not(:last-child) {
 
 /* Aside menus */
 aside {
-    position: fixed;
+    position: relative;
     top: 6rem;
     background-color: var(--blue-800);
     height: calc(100vh - 6rem);
