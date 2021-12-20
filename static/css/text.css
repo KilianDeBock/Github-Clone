@@ -20,11 +20,11 @@ h2 {
 }
 
 h3 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    flex-grow: 1;
 }
 
 h4 {
-    display: inline-block;
     font-size: 1.3rem;
 }
 

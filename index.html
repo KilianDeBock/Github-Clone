@@ -17,6 +17,15 @@
             <div>
                 <span class="covid-cases">0</span>
             </div>
+        </section>
+        <section>
+            <form class="weather-search-form">
+                <h4 id="weather-name">Ghent, Belgium</h4>
+                <div class="flex">
+                    <input id="weather-search" name="city" placeholder="Brussels, Berlin?">
+                    <button class="weather-search">Go!</button>
+                </div>
+            </form>
             <div>
                 <span class="weather">18</span>°C
             </div>
@@ -27,27 +36,21 @@
 <main class="flex flex-out">
     <div class="opener" data-parent="pgm-team">➤</div>
     <div class="closer" data-parent="pgm-team">🗶</div>
-    <div class="opener opener_right" data-parent="github-users">➤</div>
-    <div class="closer closer_right" data-parent="github-users">🗶</div>
+    <div class="opener opener_right" data-parent="search-box">➤</div>
+    <div class="closer closer_right" data-parent="search-box">🗶</div>
     <aside id="pgm-team" class="aside_left">
         <h3>PGM Team</h3>
         <ul class="team-pgm listing"></ul>
     </aside>
 
     <section class="container content">
-        <h2>Folowers</h2>
-        <section class="repos">
-            <article>
-                <h4>No Followers...</h4>
-            </article>
-        </section>
     </section>
 
-    <aside id="github-users" class="aside_right">
-        <h3>GitHub Users</h3>
-        <form class="flex github-search-form">
-            <input id="github-search" name="search" placeholder="username">
-            <button class="github-search">Search</button>
+    <aside id="search-box" class="aside_right">
+        <div class="search-type"></div>
+        <form class="flex search-form">
+            <input id="search" name="search" placeholder="username">
+            <button class="search">Search</button>
         </form>
         <ul class="users-github listing"></ul>
     </aside>

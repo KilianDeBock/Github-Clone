@@ -15,6 +15,16 @@ function GitHubApi() {
   this.getSubscribersOfUsers = async () => {};
 }
 
+function YoutubeApi() {
+  this.search = async (search) => {
+    const key = "AIzaSyCnO4mqP338pGXky4t7hJYXeM1L4PrlNvE";
+    const result = await fetch(
+      `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&maxResults=20&q=${search}`
+    );
+    return result.json();
+  };
+}
+
 function UsersApi() {
   this.getUsers = async () => {};
 }
