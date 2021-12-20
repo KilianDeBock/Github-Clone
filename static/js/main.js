@@ -215,7 +215,7 @@
           <li class="flex align-center">
               <img class="img-yt" src="${result.snippet.thumbnails.default.url}" alt="Error, no data loaded!">
               <div class="flex align-center">
-                  <p class="text_bold">${result.snippet.title}</p>
+                  <p class="text_bold"><a target="_blank" href="https://youtu.be/${result.id.videoId}">${result.snippet.title}</a></p>
               </div>
           </li>`;
         })
@@ -227,7 +227,6 @@
       return await githubApi.getSearchUsers(search);
     },
     updateGithubUsers(users) {
-      console.log(users);
       if (!users) {
         this.$usersGithub.innerHTML = "";
         return;
