@@ -204,6 +204,55 @@ form button {
     cursor: pointer;
 }
 
+.team-pgm > li *,
+.search-results > li * {
+    pointer-events: none;
+}
+
+.team-pgm > li,
+.search-results > li {
+    cursor: pointer;
+}
+
+.follows {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.follows > * {
+    border-radius: 1rem 1rem 0 0;
+    margin: 1rem 1rem 2rem;
+    padding: 1rem;
+    position: relative;
+    background-color: var(--blue-500);
+    height: 10rem;
+    max-height: 100%;
+    width: 10rem;
+    max-width: 100%
+}
+
+.follows img {
+    object-fit: contain;
+    border-radius: .5rem .5rem 0 0;
+    width: 10rem;
+    max-width: 100%
+}
+
+.follows > * p {
+    padding: .3rem .5rem;
+    border-radius: 0 0 .5rem .5rem;
+    position: absolute;
+    font-weight: bold;
+    width: 100%;
+    background-color: var(--blue-600);
+    text-align: center;
+    color: var(--blue-200);
+    font-size: .8rem;
+    bottom: -1rem;
+    left: 0;
+}
+
 @media (min-width: 63rem) {
     .opener {
         left: -20rem;
