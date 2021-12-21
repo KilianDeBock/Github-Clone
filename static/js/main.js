@@ -5,39 +5,40 @@
 
       this.cacheElements();
       this.eventListeners();
-      this.fetchWeather(this.url.searchParams.get("city")).then((r) =>
-        this.updateWeather(r)
-      );
       this.fetchGhentCovidPositiveCases().then((r) =>
         this.updateGhentCovidPositiveCases(r)
       );
+      this.fetchWeather(this.url.searchParams.get('city'))
+        .then((r) => this.updateWeather(r))
+        .then(() => this.getWeather());
       this.fetchPGMUsersList()
         .then((r) => this.updatePGMUsersList(r))
         .then((r) => this.getPGMUsersList(r));
-      this.searchEngine();
       this.fetchUserRepositories()
         .then((r) => this.getUserRepositories(r))
         .then((r) => this.updateMainContent(r));
+      this.searchEngine();
+      this.getGithub();
     },
 
     cacheElements() {
-      this.$openers = document.querySelectorAll(".opener");
-      this.$closers = document.querySelectorAll(".closer");
+      this.$openers = document.querySelectorAll('.opener');
+      this.$closers = document.querySelectorAll('.closer');
 
-      this.$teamPgm = document.querySelector(".team-pgm");
+      this.$covidCases = document.querySelector('.covid-cases');
 
-      this.$usersGithub = document.querySelector(".users-github");
-      this.$searchForm = document.querySelector(".search-form");
-      this.$searchInput = document.querySelector("#search");
-      this.$searchType = document.querySelector(".search-type");
+      this.$weather = document.querySelector('.weather');
+      this.$weatherSearch = document.querySelector('.weather-search-form');
+      this.$weatherName = document.querySelector('#weather-name');
 
-      this.$covidCases = document.querySelector(".covid-cases");
+      this.$teamPgm = document.querySelector('.team-pgm');
 
-      this.$weather = document.querySelector(".weather");
-      this.$weatherSearch = document.querySelector(".weather-search-form");
-      this.$weatherName = document.querySelector("#weather-name");
+      this.$searchForm = document.querySelector('.search-form');
+      this.$searchInput = document.querySelector('#search');
+      this.$searchType = document.querySelector('.search-type');
+      this.$searchResults = document.querySelector('.search-results');
 
-      this.$content = document.querySelector("main > section.content");
+      this.$content = document.querySelector('main > section.content');
     },
 
     eventListeners() {
@@ -45,26 +46,26 @@
       this.$openers.forEach((opener) => {
         const dsParent = opener.dataset.parent;
         const otherOpener =
-          dsParent === "pgm-team"
+          dsParent === 'pgm-team'
             ? document.querySelector(`.opener_right`)
             : document.querySelector(`.opener:not(.opener_right)`);
 
         const closer =
-          dsParent === "pgm-team"
-            ? document.querySelector(".closer:not(.closer_right)")
-            : document.querySelector(".closer_right");
+          dsParent === 'pgm-team'
+            ? document.querySelector('.closer:not(.closer_right)')
+            : document.querySelector('.closer_right');
 
         const parent = document.querySelector(`#${opener.dataset.parent}`);
 
-        opener.addEventListener("click", (ev) => {
-          if (ev.target.classList.contains("opener_right")) {
-            otherOpener.style.left = "-20rem";
-            parent.style = "right: 0";
-            closer.style.left = "calc(100% - 21.8rem)";
+        opener.addEventListener('click', (ev) => {
+          if (ev.target.classList.contains('opener_right')) {
+            otherOpener.style.left = '-20rem';
+            parent.style = 'right: 0';
+            closer.style.left = 'calc(100% - 21.8rem)';
           } else {
-            otherOpener.style.left = "calc(100% + 20rem)";
-            parent.style = "left: 0";
-            closer.style.left = "18.5rem";
+            otherOpener.style.left = 'calc(100% + 20rem)';
+            parent.style = 'left: 0';
+            closer.style.left = '18.5rem';
           }
         });
       });
@@ -73,51 +74,38 @@
       this.$closers.forEach((closer) => {
         const dsParent = closer.dataset.parent;
         const otherOpener =
-          dsParent === "pgm-team"
+          dsParent === 'pgm-team'
             ? document.querySelector(`.opener_right`)
             : document.querySelector(`.opener:not(.opener_right)`);
 
         const parent = document.querySelector(`#${closer.dataset.parent}`);
 
-        closer.addEventListener("click", () => {
-          otherOpener.style.left = parent.style = closer.style.left = "";
+        closer.addEventListener('click', () => {
+          otherOpener.style.left = parent.style = closer.style.left = '';
         });
       });
+    },
 
-      // Github search function
-      this.$searchForm.addEventListener("submit", (ev) => {
-        // For browser compatibility will change the submit query myself.
-        ev.preventDefault();
-        if (ev.target[0].value === "" || ev.target[0].value === null) {
-          this.updateGithubUsers();
-          return false;
-        }
-        this.url.searchParams.set("search", `${ev.target[0].value}`);
-        history.pushState(`search=${ev.target[0].value}`, null, this.url);
-        this.searchEngine();
-        // this.fetchGithubUsers(this.url.searchParams.get("search")).then((r) =>
-        //   this.updateGithubUsers(r)
-      });
-
-      this.$weatherSearch.addEventListener("submit", (ev) => {
+    async fetchWeather(city) {
+      city = city === null ? 'Ghent' : city;
+      const weatherApi = new WeatherApi();
+      return await weatherApi.getCurrentWeather(city);
+    },
+    updateWeather(weatherData) {
+      this.url.searchParams.set('city', weatherData.location.name);
+      history.pushState(`city=${weatherData.location.name}`, null, this.url);
+      this.$weatherName.innerHTML = `${weatherData.location.name}, ${weatherData.location.country}`;
+      this.$weather.innerHTML = weatherData.current.temp_c;
+      this.getWeather();
+    },
+    getWeather() {
+      this.$weatherSearch.addEventListener('submit', (ev) => {
         // For browser compatibility will change the submit query myself.
         ev.preventDefault();
         this.fetchWeather(ev.target[0].value).then((r) => {
           this.updateWeather(r);
         });
       });
-    },
-
-    async fetchWeather(city) {
-      city = city === null ? "Ghent" : city;
-      const weatherApi = new WeatherApi();
-      return await weatherApi.getCurrentWeather(city);
-    },
-    updateWeather(weatherData) {
-      this.url.searchParams.set("city", weatherData.location.name);
-      history.pushState(`city=${weatherData.location.name}`, null, this.url);
-      this.$weatherName.innerHTML = `${weatherData.location.name}, ${weatherData.location.country}`;
-      this.$weather.innerHTML = weatherData.current.temp_c;
     },
 
     async fetchGhentCovidPositiveCases() {
@@ -129,41 +117,45 @@
     },
 
     async fetchPGMUsersList() {
-      const response = await fetch("static/data/pgm.json");
-      return response.json();
+      const usersApi = new UsersApi();
+      return await usersApi.getUsers();
     },
     updatePGMUsersList(users) {
       this.$teamPgm.innerHTML = users
-        .map((user) => {
-          return `
-            <li>
-                <img class="round-img" src="static/media/images/thumbnail/${user.thumbnail}" alt="Error, no data loaded!">
-                <div>
-                    <p class="text_bold">${user.firstName} ${user.lastName}</p>
-                    <p>${user.portfolio.githubUsername}</p>
-                </div>
-            </li>`;
-        })
-        .join("");
+        .map((user) => `
+          <li data-user="${user.portfolio.githubUsername}">
+              <img class="round-img" src="static/media/images/thumbnail/${user.thumbnail}" alt="Error, no data loaded!">
+              <div>
+                  <p class="text_bold">${user.firstName} ${user.lastName}</p>
+                  <p>${user.portfolio.githubUsername}</p>
+              </div>
+          </li>`)
+        .join('');
     },
     getPGMUsersList() {
-      this.$teamPgmAll = document.querySelectorAll(".team-pgm > li");
+      this.$teamPgmAll = document.querySelectorAll('.team-pgm > li');
       this.$teamPgmAll.forEach((teamMember) => {
-        teamMember.addEventListener("click", (ev) => {
-          console.log(ev);
+        teamMember.addEventListener('click', (ev) => {
+          console.log(ev.target.dataset.user);
+          this.generateUserInfo(ev.target.dataset.user).then(r => this.updateMainContent(r));
         });
       });
     },
+    async generateUserInfo(user) {
+      const repos = await this.fetchUserRepositories(user)
+        .then(r => this.getUserRepositories(r));
+      const followers = await this.fetchUserFollows(user)
+        .then(r => this.getUserFollows(r));
+      return repos + followers;
+    },
 
     searchEngine() {
-      const searchType = this.url.searchParams.get("searchType");
+      const searchType = this.url.searchParams.get('searchType');
 
-      if (searchType === "YouTube") {
+      if (searchType === 'YouTube') {
         this.getSearchEngine(false);
-        this.searchEngineCheck(false);
       } else {
         this.getSearchEngine(true);
-        this.searchEngineCheck(true);
       }
     },
     getSearchEngine(type = true) {
@@ -181,23 +173,27 @@
           </div>
           <h3 class="red-bg">Youtube Search</h3>`);
       type
-        ? this.url.searchParams.set("searchType", "Github")
-        : this.url.searchParams.set("searchType", "YouTube");
-      history.pushState("searchType: Type", null, this.url);
-      const search = document.querySelector(".search_youtube-github");
-      search.addEventListener("click", () => this.getSearchEngine(!type));
+        ? this.url.searchParams.set('searchType', 'Github')
+        : this.url.searchParams.set('searchType', 'YouTube');
+      history.pushState('searchType: Type', null, this.url);
       type ? this.searchEngineCheck(true) : this.searchEngineCheck(false);
+      const search = document.querySelector('.search_youtube-github');
+      if (search.dataset.listener !== 'true') {
+        // Set element as having a event listener
+        search.dataset.listener = 'true';
+        search.addEventListener('click', () => this.getSearchEngine(!type));
+      }
     },
     searchEngineCheck(type) {
-      const search = this.url.searchParams.get("search");
-      if (search === "" || search === null) return false;
+      const search = this.url.searchParams.get('search');
+      if (search === '' || search === null) return false;
       this.$searchInput.value = search;
 
       type
         ? this.fetchGithubUsers(search).then((r) => this.updateGithubUsers(r))
         : this.fetchYoutubeSearch(search).then((r) =>
-            this.updateYoutubeSearch(r)
-          );
+          this.updateYoutubeSearch(r)
+        );
     },
 
     async fetchYoutubeSearch(search) {
@@ -206,10 +202,10 @@
     },
     updateYoutubeSearch(results) {
       if (!results) {
-        this.$usersGithub.innerHTML = "";
+        this.$searchResults.innerHTML = '';
         return;
       }
-      this.$usersGithub.innerHTML = results.items
+      this.$searchResults.innerHTML = results.items
         .map((result) => {
           return `
           <li class="flex align-center">
@@ -219,7 +215,7 @@
               </div>
           </li>`;
         })
-        .join("");
+        .join('');
     },
 
     async fetchGithubUsers(search) {
@@ -228,10 +224,10 @@
     },
     updateGithubUsers(users) {
       if (!users) {
-        this.$usersGithub.innerHTML = "";
+        this.$searchResults.innerHTML = '';
         return;
       }
-      this.$usersGithub.innerHTML = users.items
+      this.$searchResults.innerHTML = users.items
         .map((user) => {
           return `
           <li>
@@ -241,27 +237,42 @@
               </div>
           </li>`;
         })
-        .join("");
+        .join('');
     },
-    async fetchUserRepositories(username = "pgmgent") {
+    getGithub() {
+      this.$searchForm.addEventListener('submit', (ev) => {
+        // For browser compatibility will change the submit query myself.
+        ev.preventDefault();
+        if (ev.target[0].value === '' || ev.target[0].value === null) {
+          this.updateGithubUsers();
+          return false;
+        }
+        this.url.searchParams.set('search', `${ev.target[0].value}`);
+        history.pushState(`search=${ev.target[0].value}`, null, this.url);
+        this.searchEngine();
+      });
+    },
+    async fetchUserRepositories(username = 'pgmgent') {
       const githubApi = new GitHubApi();
       return await githubApi.getReposOfUsers(username);
     },
     getUserRepositories(data) {
-      const repos = data
-        .map((repo) => {
+      console.log(data);
+      data.length > 0 ? console.log(true) : console.log(false);
+      const repos = data.length > 0
+        ? data.map((repo) => {
           const license = repo.license
             ? `<span class="license">${repo.license.name}</span>`
-            : "";
+            : '';
           const description = repo.description
             ? `<p>${repo.description}</p>`
-            : "";
+            : '';
           return `
           <article>
               <h4><a target="_blank" href="${repo.html_url}">${repo.full_name}</a></h4>
               ${description}
               <div class="tags">
-                  <span class="size">${repo.size}KB</span>
+                  <span class="size">${repo.size <= 999 ? repo.size + 'KB' : (repo.size / 1000).toFixed(2) + 'MB'}</span>
                   <span class="branche">${repo.default_branch}</span>${license}
                   <span class="visibility">${repo.visibility}</span>
                   <span class="issues">${repo.open_issues}</span>
@@ -269,24 +280,42 @@
                   <span class="stars">${repo.stargazers_count}</span>
               </div>
           </article>`;
-        })
-        .join("");
+        }).join('')
+        : '<article><h4>No repositories found...</h4></article>';
       return `
-        <h2>Repositories</h2>
-        <section class="repos">
-            ${repos}
-        </section>
-        <h2>Folowers</h2>
-        <section class="repos">
-            <article>
-                <h4>No Followers...</h4>
-            </article>
+      <h2>Repositories</h2>
+      <section class="repos">
+          ${repos}
+      </section>`;
+    },
+    async fetchUserFollows(username = 'pgmgent') {
+      const githubApi = new GitHubApi();
+      return await githubApi.getFollowersOfUsers(username);
+    },
+    getUserFollows(data) {
+      console.log(data);
+      const followers = data
+        .map((follower) => `
+            <div>
+                <h4>${follower.login}</h4>
+                <img class="round-img" src="${follower.avatar_url}" alt="${follower.login}">
+            </div>`
+        ).join('');
+      return `
+        <h2>Followers</h2>
+        <section class="follows">
+            ${followers}
         </section>`;
     },
 
     updateMainContent(data) {
       this.$content.innerHTML = data;
     },
+    data: {
+      pgmUsers: {
+        temp: ''
+      }
+    }
   };
   app.init();
 })();
