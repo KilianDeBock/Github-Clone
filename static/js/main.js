@@ -102,9 +102,9 @@
       this.$weatherSearch.addEventListener("submit", (ev) => {
         // For browser compatibility will change the submit query myself.
         ev.preventDefault();
-        this.fetchWeather(ev.target[0].value).then((r) => {
-          this.updateWeather(r);
-        });
+        this.fetchWeather(ev.target[0].value)
+          .then((r) => this.updateWeather(r))
+          .catch();
       });
     },
 
@@ -134,24 +134,28 @@
         )
         .join("");
     },
+
     getUsersList(query = ".team-pgm > li") {
       const $users = document.querySelectorAll(query);
       $users.forEach((user) => {
         user.addEventListener("click", (ev) => {
-          this.generateUserInfo(ev.target.dataset.user).then((r) =>
-            this.updateMainContent(r)
-          );
+          this.generateUserInfo(ev.target.dataset.user)
+            .then((r) => this.updateMainContent(r))
+            .then(() => this.getUsersList(".follows > li"));
         });
       });
     },
     async generateUserInfo(user) {
+      const header = await this.fetchUser(user).then((r) =>
+        this.getUserHeader(r)
+      );
       const repos = await this.fetchUserRepositories(user).then((r) =>
         this.getUserRepositories(r)
       );
       const followers = await this.fetchUserFollows(user).then((r) =>
         this.getUserFollows(r)
       );
-      return repos + followers;
+      return header + repos + followers;
     },
 
     searchEngine() {
@@ -198,9 +202,11 @@
         ? this.fetchGithubUsers(search)
             .then((r) => this.updateGithubUsers(r))
             .then(() => this.getUsersList(".search-results li"))
+            .catch()
         : this.fetchYoutubeSearch(search)
             .then((r) => this.updateYoutubeSearch(r))
-            .then(() => this.getUsersList(".search-results li"));
+            .then(() => this.getUsersList(".search-results li"))
+            .catch();
     },
 
     async fetchYoutubeSearch(search) {
@@ -312,30 +318,49 @@
           ? data
               .map(
                 (follower) => `
-              <a target="_blank" href="${follower.html_url}">
-                <div>
+                <li data-user="${follower.login}">
                     <p>${follower.login}</p>
                     <img src="${follower.avatar_url}" alt="${follower.login}">
-                </div>
-              </a>`
+                </li>`
               )
               .join("")
           : "<article><h4>No followers found...</h4></article>";
 
       return `
         <h2>Followers</h2>
-        <section class="${data.length > 0 ? "follows" : ""}">
+        <ul class="${data.length > 0 ? "follows" : ""}">
             ${followers}
-        </section>`;
+        </ul>`;
     },
 
+    async fetchUser(username) {
+      const githubApi = new GitHubApi();
+      return await githubApi.getSearchUsers(username);
+    },
+    async getUserHeader({ items: [user] }) {
+      const usersApi = new UsersApi();
+      const pgmUsers = await usersApi.getUsers();
+      const [pgmUser] = pgmUsers.filter(
+        (databaseUser) => databaseUser.portfolio.githubUsername === user.login
+      );
+      console.log(pgmUser);
+      const date = pgmUser ? new Date(pgmUser.birthday) : "";
+      const isPgmUser = pgmUser
+        ? `<p class="profile-quote">${pgmUser.quote}</p>
+           <p class="profile-lecturer">${
+             pgmUser.lecturer ? "Lecturer" : "Student"
+           }</p>
+           <p class="profile-bday">${date.getDay()}/${date.getMonth()}/${date.getFullYear()}</p>`
+        : "";
+      return user
+        ? `<section class="profile-details" style="background-image: url(${user.avatar_url})">
+                <p class="profile-name">${user.login}</p>
+                ${isPgmUser}
+            </section>`
+        : "<article><h4>Oops! Not found...</h4></article>";
+    },
     updateMainContent(data) {
       this.$content.innerHTML = data;
-    },
-    data: {
-      pgmUsers: {
-        temp: "",
-      },
     },
   };
   app.init();

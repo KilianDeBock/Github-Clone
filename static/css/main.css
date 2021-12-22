@@ -91,22 +91,22 @@ main > .content {
     transition: margin 0.2s ease-in-out;
 }
 
-main > .content > section {
+main > .content > *:not(h2) {
     margin: 1rem 0;
     border: 1px solid var(--gray-500);
     border-radius: 1rem;
     width: 100%;
 }
 
-main > .content > section:not(:last-child) {
+main > .content > *:not(h2):not(:last-child) {
     margin-bottom: 5rem;
 }
 
-main > .content > section > article {
+main > .content > *:not(h2) > article {
     padding: 1rem 1.5rem;
 }
 
-main > .content > section > article:not(:last-child) {
+main > .content > * > article:not(:last-child) {
     border-bottom: 1px solid var(--gray-500);
 }
 
