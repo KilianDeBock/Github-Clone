@@ -139,15 +139,23 @@
         .join("");
     },
 
-    getUsersList(query = ".team-pgm > li") {
+    getUsersList(query = ".team-pgm > li", youtube = false) {
       const $users = document.querySelectorAll(query);
-      $users.forEach((user) => {
-        user.addEventListener("click", (ev) => {
-          this.generateUserInfo(ev.target.dataset.user)
-            .then((r) => this.updateMainContent(r))
-            .then(() => this.getUsersList(".follows > li"));
-        });
-      });
+      youtube
+        ? $users.forEach((user) => {
+            user.addEventListener("click", (ev) => {
+              this.generateUserInfo(ev.target.dataset.user)
+                .then((r) => this.updateMainContent(r))
+                .then(() => this.getUsersList(".follows > li"));
+            });
+          })
+        : $users.forEach((user) => {
+            user.addEventListener("click", (ev) => {
+              this.fetchYoutubeVideo(ev.target.dataset.video)
+                .then((r) => this.generateYoutubeInfo(r))
+                .then((r) => this.updateMainContent(r));
+            });
+          });
     },
     async generateUserInfo(user) {
       const header = await this.fetchUser(user).then((r) =>
@@ -209,7 +217,7 @@
             .catch()
         : this.fetchYoutubeSearch(search)
             .then((r) => this.updateYoutubeSearch(r))
-            .then(() => this.getUsersList(".search-results li"))
+            .then(() => this.getUsersList(".search-results li"), true)
             .catch();
     },
 
@@ -225,7 +233,7 @@
       this.$searchResults.innerHTML = results.items
         .map((result) => {
           return `
-          <li class="flex align-center">
+          <li class="flex align-center" data-video="${result.id.videoId}">
               <img class="img-yt" src="${result.snippet.thumbnails.default.url}" alt="Error, no data loaded!">
               <div class="flex align-center">
                   <p class="text_bold"><a target="_blank" href="https://youtu.be/${result.id.videoId}">${result.snippet.title}</a></p>
@@ -233,6 +241,18 @@
           </li>`;
         })
         .join("");
+    },
+
+    async fetchYoutubeVideo(videoId) {
+      const youtubeApi = new YoutubeApi();
+      return await youtubeApi.getVideo(videoId);
+    },
+    generateYoutubeInfo({ items: [data] }) {
+      console.log(data);
+      return `
+        <section>
+          <iframe class="yt-player" frameborder="0" loading="lazy" src="https://www.youtube.com/embed/${data.id}" type="text/html"></iframe>
+        </section>`;
     },
 
     async fetchGithubUsers(search) {

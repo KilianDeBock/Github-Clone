@@ -17,15 +17,20 @@ function GitHubApi() {
     );
     return result.json();
   };
-  this.getSubscribersOfUsers = async () => {
-  };
+  this.getSubscribersOfUsers = async () => {};
 }
 
 function YoutubeApi() {
+  this.key = "AIzaSyCnO4mqP338pGXky4t7hJYXeM1L4PrlNvE";
   this.search = async (search) => {
-    const key = 'AIzaSyCnO4mqP338pGXky4t7hJYXeM1L4PrlNvE';
     const result = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?key=${key}&part=snippet&maxResults=20&q=${search}`
+      `https://www.googleapis.com/youtube/v3/search?key=${this.key}&part=snippet&maxResults=20&q=${search}`
+    );
+    return result.json();
+  };
+  this.getVideo = async (videoId) => {
+    const result = await fetch(
+      `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${this.key}`
     );
     return result.json();
   };
@@ -33,15 +38,17 @@ function YoutubeApi() {
 
 function UsersApi() {
   this.getUsers = async () => {
-    const response = await fetch('static/data/pgm.json');
+    const response = await fetch("static/data/pgm.json");
     return response.json();
   };
 }
 
 function WeatherApi() {
-  this.getCurrentWeather = async (city = 'Ghent') => {
-    const key = 'de293147099b4f26a26184812211512';
-    const result = await fetch(`https://api.weatherapi.com/v1/current.json?key=${key}&q=${city}`);
+  this.getCurrentWeather = async (city = "Ghent") => {
+    const key = "de293147099b4f26a26184812211512";
+    const result = await fetch(
+      `https://api.weatherapi.com/v1/current.json?key=${key}&q=${city}`
+    );
     return result.json();
   };
 }

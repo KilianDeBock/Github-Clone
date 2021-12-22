@@ -139,6 +139,12 @@
     margin: .5rem;
 }
 
+.yt-player {
+    border-radius: 1rem;
+    width: 100%;
+    height: calc(100vw / 3);
+}
+
 .tags > *:not(:first-child) {
     padding-left: 2rem;
     background-repeat: no-repeat;
