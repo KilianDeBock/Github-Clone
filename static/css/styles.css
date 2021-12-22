@@ -77,22 +77,30 @@
     display: inline-block;
 }
 
-.opener {
+.opener,
+.closer {
     position: absolute;
     width: 3rem;
     cursor: pointer;
     height: 3rem;
-    font-size: 3rem;
+    transition: left .2s ease-in-out, right .2s ease-in-out;
+}
+
+.opener {
+    top: 6rem;
     z-index: 1;
+    font-size: 3rem;
+}
+
+.opener:not(.opener_right) {
     left: 1rem;
-    transition: left .2s ease-in-out, right .2s ease-in;
     animation-name: opener;
     animation-duration: 2s;
     animation-iteration-count: infinite;
 }
 
 .opener_right {
-    left: calc(100% - 4rem);
+    right: 1rem;
     transform: translateY(2.6rem) rotate(180deg);
     animation-name: opener_right;
     animation-duration: 2s;
@@ -100,21 +108,18 @@
 }
 
 .closer {
-    color: red;
-    cursor: pointer;
-    position: absolute;
     top: 3.5rem;
-    font-size: 5rem;
     z-index: 2;
-    left: -5rem;
-    transition: left .2s ease-in-out, right .2s ease-in;
-    animation-name: closer;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
+    color: red;
+    font-size: 5rem;
+}
+
+.closer:not(.closer_right) {
+    left: -100%;
 }
 
 .closer_right {
-    left: 110%;
+    right: -100%;
 }
 
 .listing {
@@ -288,20 +293,25 @@ form button {
     border-radius: 1rem 1rem 0 0;
 }
 
+.profile-bday,
 .profile-lecturer {
     position: absolute;
-    top: 50%;
+    top: 17rem;
+    width: 33rem;
+    font-size: 2rem;
+    text-align: center;
+    background-color: var(--blue-100)
+}
+
+.profile-lecturer {
+    left: -12.95rem;
     transform: rotate(-90deg) translateY(-50%);
-    width: 100%;
     text-align: center;
 }
 
 .profile-bday {
-    position: absolute;
-    top: 50%;
+    right: -12.95rem;
     transform: rotate(90deg) translateY(-50%);
-    width: 100%;
-    text-align: center;
 }
 
 @media (min-width: 63rem) {
@@ -310,7 +320,7 @@ form button {
     }
 
     .opener_right {
-        left: 100%;
+        right: -20rem;
     }
 }
 

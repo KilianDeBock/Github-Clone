@@ -52,6 +52,8 @@ nav {
 }
 
 main {
+    position: fixed;
+    width: 100%;
     padding: 6rem;
 }
 
@@ -64,7 +66,7 @@ main {
 }
 
 .main-nav > section {
-    display: flex;
+    display: none;
 }
 
 .main-nav > section > * {
@@ -86,6 +88,7 @@ main > .content {
     overflow-y: auto;
     display: flex;
     height: calc(100vh - 6rem);
+    width: 100%;
     flex-direction: column;
     align-items: center;
     transition: margin 0.2s ease-in-out;
@@ -147,10 +150,30 @@ aside {
     background: var(--blue-100);
 }
 
+@media (min-width: 33rem) {
+    .main-nav > section {
+        display: flex;
+    }
+
+    .main-nav > section:first-of-type {
+        display: none
+    }
+}
+
+@media (min-width: 50rem) {
+    .main-nav > section:first-of-type {
+        display: unset;
+    }
+}
+
 @media (min-width: 63rem) {
     main > section {
         margin: 0 18rem;
         width: calc(100vw - (18rem * 2));
+    }
+
+    main > .content {
+        width: calc(100% - 36rem);
     }
 
     .aside_left {

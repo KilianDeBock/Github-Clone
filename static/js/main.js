@@ -61,7 +61,7 @@
           if (ev.target.classList.contains("opener_right")) {
             otherOpener.style.left = "-20rem";
             parent.style = "right: 0";
-            closer.style.left = "calc(100% - 21.8rem)";
+            closer.style.right = "18.5rem";
           } else {
             otherOpener.style.left = "calc(100% + 20rem)";
             parent.style = "left: 0";
@@ -81,7 +81,11 @@
         const parent = document.querySelector(`#${closer.dataset.parent}`);
 
         closer.addEventListener("click", () => {
-          otherOpener.style.left = parent.style = closer.style.left = "";
+          otherOpener.style.left =
+            parent.style =
+            closer.style.left =
+            closer.style.right =
+              "";
         });
       });
     },
@@ -343,20 +347,21 @@
       const [pgmUser] = pgmUsers.filter(
         (databaseUser) => databaseUser.portfolio.githubUsername === user.login
       );
-      console.log(pgmUser);
       const date = pgmUser ? new Date(pgmUser.birthday) : "";
       const isPgmUser = pgmUser
-        ? `<p class="profile-quote">${pgmUser.quote}</p>
-           <p class="profile-lecturer">${
-             pgmUser.lecturer ? "Lecturer" : "Student"
-           }</p>
-           <p class="profile-bday">${date.getDay()}/${date.getMonth()}/${date.getFullYear()}</p>`
+        ? `<p class="profile-lecturer">${
+            pgmUser.lecturer ? "Lecturer" : "Student"
+          }</p>
+           <p class="profile-bday">${date.getDate()}/${
+            date.getMonth() + 1
+          }/${date.getFullYear()}</p>
+           <p class="profile-quote">${pgmUser.quote}</p>`
         : "";
       return user
-        ? `<section class="profile-details" style="background-image: url(${user.avatar_url})">
-                <p class="profile-name">${user.login}</p>
-                ${isPgmUser}
-            </section>`
+        ? `<section class='profile-details' style='background-image: url(${user.avatar_url})'>
+              ${isPgmUser}
+              <p class='profile-name'>${user.login}</p>
+           </section>`
         : "<article><h4>Oops! Not found...</h4></article>";
     },
     updateMainContent(data) {

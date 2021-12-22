@@ -7,23 +7,23 @@
     "quote": "All you had to do was follow the damn train, CJ!",
     "portfolio": {
       "githubUsername": "pgm-michielwillems",
-      "LinkedInUsername": ""
+      "LinkedInUsername": "pgm-michielwillem"
     },
     "lecturer": false,
-    "birthday": 605591164
+    "birthday": 605591164000
   },
   {
     "firstName": "Adriaan",
     "lastName": "Glibert",
     "email": "adriaan.glibert@arteveldehs.be",
     "thumbnail": "4de57865-11de-4f39-a46c-c5518132e9e4.jpg",
-    "quote": "",
+    "quote": "Let's A Go!",
     "portfolio": {
       "githubUsername": "adriaanglibert",
-      "LinkedInUsername": ""
+      "LinkedInUsername": "adriaanglibert"
     },
     "lecturer": true,
-    "birthday": 291895480
+    "birthday": 291895480000
   },
   {
     "firstName": "Emma",
@@ -33,10 +33,10 @@
     "quote": "The journey of a thousand miles begins with one single step.",
     "portfolio": {
       "githubUsername": "pgm-emmavanderhaeghen",
-      "LinkedInUsername": ""
+      "LinkedInUsername": "pgm-emmavanderhaeghen"
     },
     "lecturer": false,
-    "birthday": 417330535
+    "birthday": 417330535000
   },
   {
     "firstName": "Kimberly",
@@ -46,10 +46,10 @@
     "quote": "At least im hot",
     "portfolio": {
       "githubUsername": "pgm-kim",
-      "LinkedInUsername": ""
+      "LinkedInUsername": "pgm-kim"
     },
     "lecturer": false,
-    "birthday": 506288972
+    "birthday": 506288972000
   },
   {
     "firstName": "Tara",
@@ -59,10 +59,10 @@
     "quote": "I'll take a potato chip... And EAT IT!",
     "portfolio": {
       "githubUsername": "pgm-taraverm",
-      "LinkedInUsername": ""
+      "LinkedInUsername": "pgm-taraverm"
     },
     "lecturer": false,
-    "birthday": 690125483
+    "birthday": 690125483000
   },
   {
     "firstName": "Philippe",
@@ -72,35 +72,35 @@
     "quote": "Teamleader Associate Degree in Computer Programming | Coordinator Workplace Learning | Full-Stack Developer | @pgmgent @gdmgent",
     "portfolio": {
       "githubUsername": "drdynscript",
-      "LinkedInUsername": ""
+      "LinkedInUsername": "drdynscript"
     },
-    "lecturer": false,
-    "birthday": 1009349892
+    "lecturer": true,
+    "birthday": 1009349892000
   },
   {
     "firstName": "Veli",
     "lastName": "Duran",
     "email": "veli.duran@student.arteveldehs.be",
     "thumbnail": "5367d869-dfe3-4b64-af9c-0b0292446e8a.jpg",
-    "quote": "",
+    "quote": "Let's A Go!",
     "portfolio": {
       "githubUsername": "pgm-velidura",
-      "LinkedInUsername": ""
+      "LinkedInUsername": "pgm-velidura"
     },
     "lecturer": false,
-    "birthday": 1119450172
+    "birthday": 1119450172000
   },
   {
     "firstName": "Helena",
     "lastName": "Yankson",
     "email": "helena.yankson@student.arteveldehs.be",
     "thumbnail": "d7c98a1b-bc82-4ed6-8be0-2b9f60d3ff82.jpg",
-    "quote": "",
+    "quote": "Let's A Go!",
     "portfolio": {
       "githubUsername": "pgm-heleyank",
-      "LinkedInUsername": ""
+      "LinkedInUsername": "pgm-heleyank"
     },
     "lecturer": false,
-    "birthday": 1068517357
+    "birthday": 1068517357000
   }
 ]
