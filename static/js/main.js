@@ -144,16 +144,16 @@
       youtube
         ? $users.forEach((user) => {
             user.addEventListener("click", (ev) => {
-              this.generateUserInfo(ev.target.dataset.user)
-                .then((r) => this.updateMainContent(r))
-                .then(() => this.getUsersList(".follows > li"));
+              this.fetchYoutubeVideo(ev.target.dataset.video)
+                .then((r) => this.generateYoutubeInfo(r))
+                .then((r) => this.updateMainContent(r));
             });
           })
         : $users.forEach((user) => {
             user.addEventListener("click", (ev) => {
-              this.fetchYoutubeVideo(ev.target.dataset.video)
-                .then((r) => this.generateYoutubeInfo(r))
-                .then((r) => this.updateMainContent(r));
+              this.generateUserInfo(ev.target.dataset.user)
+                .then((r) => this.updateMainContent(r))
+                .then(() => this.getUsersList(".follows > li"));
             });
           });
     },
@@ -217,7 +217,7 @@
             .catch()
         : this.fetchYoutubeSearch(search)
             .then((r) => this.updateYoutubeSearch(r))
-            .then(() => this.getUsersList(".search-results li"), true)
+            .then(() => this.getUsersList(".search-results li", true))
             .catch();
     },
 
