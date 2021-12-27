@@ -57,10 +57,17 @@ function YoutubeApi() {
 function UsersApi() {
   // Get function
   this.getUsers = async () => {
-    // fetch
-    const response = await fetch("static/data/pgm.json");
-    // return json
-    return response.json();
+    try {
+      return await fetch("static/data/pgm.json").then((r) => r.json());
+    } catch {
+      if (!staticPgmUsersHackSeadAndDone) {
+        window.alert(
+          "This application is created in a live server environment, all works without it, except loading json files, I added a quick fix for this but is not recommended for best experience"
+        );
+        staticPgmUsersHackSeadAndDone = true;
+      }
+      return staticPgmUsersHack;
+    }
   };
 }
 
