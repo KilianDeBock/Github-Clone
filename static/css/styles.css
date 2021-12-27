@@ -23,6 +23,7 @@
 .arrow-left {
     position: relative;
     width: 2rem;
+    cursor: pointer;
 }
 
 .arrow-right {
@@ -140,6 +141,7 @@
 }
 
 .yt-player {
+    border: none;
     border-radius: 1rem;
     width: 100%;
     height: calc(100vw / 3);
