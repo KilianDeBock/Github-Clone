@@ -1,0 +1,351 @@
+.flex {
+    display: flex;
+}
+
+.flex-out {
+    justify-content: space-between;
+}
+
+.search-type {
+    display: flex;
+}
+
+.red-bg {
+    background-color: var(--red-500);
+    color: white;
+}
+
+.blue-bg {
+    background-color: var(--blue-200)
+}
+
+.arrow-right,
+.arrow-left {
+    position: relative;
+    width: 2rem;
+    cursor: pointer;
+}
+
+.arrow-right {
+    transform: rotate(180deg);
+}
+
+.arrow-right span,
+.arrow-left span {
+    position: absolute;
+    border-radius: 1rem;
+    background-color: white;
+    width: 1.2rem;
+    height: .2rem;
+    left: .3rem;
+}
+
+.arrow-right span:first-child,
+.arrow-left span:first-child {
+    top: 1.54rem;
+    transform: rotate(-45deg);
+}
+
+.arrow-right span:last-child,
+.arrow-left span:last-child {
+    top: 2.26rem;
+    transform: rotate(45deg);
+}
+
+.align-center {
+    align-items: center;
+}
+
+.img-yt {
+    height: 3rem;
+    min-width: 5.5rem;
+    object-fit: cover;
+}
+
+.round-img_link,
+.round-img_link img {
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.round-img,
+.round-img img {
+    height: 3rem;
+    width: 3rem;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: auto 0;
+    display: inline-block;
+}
+
+.opener,
+.closer {
+    position: absolute;
+    width: 3rem;
+    cursor: pointer;
+    height: 3rem;
+    transition: left .2s ease-in-out, right .2s ease-in-out;
+}
+
+.opener {
+    top: 6rem;
+    z-index: 1;
+    font-size: 3rem;
+}
+
+.opener:not(.opener_right) {
+    left: 1rem;
+    animation-name: opener;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.opener_right {
+    right: 1rem;
+    transform: translateY(2.6rem) rotate(180deg);
+    animation-name: opener_right;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.closer {
+    top: 3.5rem;
+    z-index: 2;
+    color: red;
+    font-size: 5rem;
+}
+
+.closer:not(.closer_right) {
+    left: -100%;
+}
+
+.closer_right {
+    right: -100%;
+}
+
+.listing {
+    overflow-y: auto;
+    height: calc(100vh - 12rem);
+}
+
+.listing li {
+    display: flex;
+}
+
+.listing li:nth-child(2n+2) {
+    background-color: var(--blue-600);
+}
+
+.listing li > * {
+    margin: .5rem;
+}
+
+.yt-player {
+    border: none;
+    border-radius: 1rem;
+    width: 100%;
+    height: calc(100vw / 3);
+}
+
+.tags > *:not(:first-child) {
+    padding-left: 2rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.tags > *:not(:last-child) {
+    margin-right: 1.5rem;
+}
+
+.tags > .branche {
+    background-image: url("../media/images/icons/branche.svg");
+}
+
+.tags > .license {
+    background-image: url("../media/images/icons/license.svg");
+}
+
+.tags > .visibility {
+    background-image: url("../media/images/icons/security.svg");
+}
+
+.tags > .issues {
+    background-image: url("../media/images/icons/issues.svg");
+}
+
+.tags > .watch {
+    background-image: url("../media/images/icons/watch.svg");
+}
+
+.tags > .stars {
+    background-image: url("../media/images/icons/star.svg");
+}
+
+.weather {
+    padding-left: 4rem;
+    background-repeat: no-repeat;
+    background-size: 3.5rem;
+    background-position: 0 50%;
+    background-image: url("../media/images/icons/weather.gif");
+}
+
+.covid-cases {
+    padding-left: 2.8rem;
+    background-repeat: no-repeat;
+    background-size: 2rem;
+    background-position: 0 50%;
+    background-image: url("../media/images/icons/covid-19.svg");
+    margin-right: 2.5rem;
+}
+
+form input {
+    background-color: var(--blue-500);
+    border: none;
+    width: 70%;
+    padding: .5rem 1rem;
+}
+
+form input:focus {
+    outline: none;
+}
+
+form button {
+    background-color: var(--gray-550);
+    border: none;
+    width: 30%;
+    padding: .5rem 1rem;
+    cursor: pointer;
+}
+
+.team-pgm > li *,
+.search-results > li *,
+.follows > li * {
+    pointer-events: none;
+}
+
+.team-pgm > li,
+.search-results > li,
+.follows > li {
+    cursor: pointer;
+}
+
+.follows {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.follows > * {
+    border-radius: 1rem 1rem 0 0;
+    margin: 1rem 1rem 2rem;
+    padding: 1rem;
+    position: relative;
+    background-color: var(--blue-500);
+    height: 10rem;
+    max-height: 100%;
+    width: 10rem;
+    max-width: 100%
+}
+
+.follows img {
+    object-fit: contain;
+    border-radius: .5rem .5rem 0 0;
+    width: 10rem;
+    max-width: 100%
+}
+
+.follows > * p {
+    padding: .3rem .5rem;
+    border-radius: 0 0 .5rem .5rem;
+    position: absolute;
+    font-weight: bold;
+    width: 100%;
+    background-color: var(--blue-600);
+    text-align: center;
+    color: var(--blue-200);
+    font-size: .8rem;
+    bottom: -1rem;
+    left: 0;
+}
+
+.profile-details {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 40rem;
+}
+
+.profile-name {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    font-size: 3rem;
+    font-weight: bold;
+    background-color: var(--blue-500);
+    border-radius: 0 0 1rem 1rem;
+}
+
+.profile-quote {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: var(--blue-100);
+    border-radius: 1rem 1rem 0 0;
+}
+
+.profile-bday,
+.profile-lecturer {
+    position: absolute;
+    top: 17rem;
+    width: 33rem;
+    font-size: 2rem;
+    text-align: center;
+    background-color: var(--blue-100)
+}
+
+.profile-lecturer {
+    left: -12.95rem;
+    transform: rotate(-90deg) translateY(-50%);
+    text-align: center;
+}
+
+.profile-bday {
+    right: -12.95rem;
+    transform: rotate(90deg) translateY(-50%);
+}
+
+@media (min-width: 63rem) {
+    .opener {
+        left: -20rem;
+    }
+
+    .opener_right {
+        right: -20rem;
+    }
+}
+
+@keyframes opener {
+    30% {
+        transform: translateX(1rem) scale(1.2) rotate(-5deg);
+    }
+    60% {
+        transform: translateX(1rem) scale(1.2) rotate(5deg);
+    }
+}
+
+@keyframes opener_right {
+    30% {
+        transform: translateX(-1rem) scale(1.2) rotate(5deg) translateY(2.6rem) rotate(180deg);;
+    }
+    60% {
+        transform: translateX(-1rem) scale(1.2) rotate(-5deg) translateY(2.6rem) rotate(180deg);;
+    }
+}

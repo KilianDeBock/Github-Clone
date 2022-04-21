@@ -1,0 +1,41 @@
+* {
+    color: white;
+}
+
+h2,
+h3 {
+    background-color: var(--blue-200);
+    padding: 1rem 2rem;
+    color: black;
+    line-height: 1.2;
+    text-align: center;
+    font-weight: bold;
+    max-width: 100%;
+}
+
+h2 {
+    font-size: 2.5rem;
+    padding: 0.5rem 3rem;
+    border-radius: 1rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    flex-grow: 1;
+}
+
+h4 {
+    font-size: 1.3rem;
+}
+
+.text_bold {
+    font-weight: bold;
+    letter-spacing: .02rem;
+    line-height: 1.2rem
+}
+
+a {
+    color: var(--blue-200);
+    text-decoration: none;
+    font-weight: bold;
+}
